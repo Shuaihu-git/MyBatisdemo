@@ -90,5 +90,10 @@ public class MyBatisTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void annoation(){
+
+    }
+
 
 }
