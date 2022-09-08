@@ -7,11 +7,14 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 import org.shuaihu.vip.mybatis.mapper.UserMapper;
 import org.shuaihu.vip.mybatis.pojo.User;
+import org.shuaihu.vip.mybatis.utils.SQLSessionUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyBatisTest {
     @Test
@@ -91,8 +94,46 @@ public class MyBatisTest {
         }
     }
     @Test
-    public void annoation(){
+    public void TestUserInfoByUsername() throws IOException {
+        SqlSession sqLsession = SQLSessionUtils.getSQLsession();
+        UserMapper mapper = sqLsession.getMapper(UserMapper.class);
+        User user = mapper.getUserInfoByUserName("王五");
+        System.out.println(user);
 
+    }
+    @Test
+    public void  TestcheckLogin(){
+        SqlSession sqLsession = SQLSessionUtils.getSQLsession();
+        UserMapper mapper = sqLsession.getMapper(UserMapper.class);
+        User user = mapper.checkLogin("王五", "root");
+        System.out.println(user);
+
+    }
+
+    @Test
+    public void  TestcheckLoginByMap(){
+        SqlSession sqLsession = SQLSessionUtils.getSQLsession();
+        UserMapper mapper = sqLsession.getMapper(UserMapper.class);
+        Map<String,Object> map=new HashMap<>();
+        map.put("username","王五");
+        map.put("passwd","root");
+        User user = mapper.checkLoginByMap(map);
+        System.out.println(user);
+
+    }
+    @Test
+    public void  TestInsertUser(){
+        SqlSession sqLsession = SQLSessionUtils.getSQLsession();
+        UserMapper mapper = sqLsession.getMapper(UserMapper.class);
+        int result = mapper.insertUserByUser(new User(null, "admin", "root..", 23, "男", "1231313553@qq.com"));
+        System.out.println(result);
+    }
+    @Test
+        public void  TestcheckLoginByParam(){
+            SqlSession sqLsession = SQLSessionUtils.getSQLsession();
+            UserMapper mapper = sqLsession.getMapper(UserMapper.class);
+            User user = mapper.checkLoginByParam("admin", "root..");
+            System.out.println(user);
     }
 
 

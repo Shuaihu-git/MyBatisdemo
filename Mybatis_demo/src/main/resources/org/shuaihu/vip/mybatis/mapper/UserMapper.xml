@@ -19,11 +19,21 @@
     <select id="findUserAll" resultType="org.shuaihu.vip.mybatis.pojo.User">
         select * from t_user
     </select>
-    <select id="getUserInfoByUserName" resultType="UserMapper">
+    <select id="getUserInfoByUserName" resultType="User">
         select * from t_user where username="${username}"
     </select>
-    <select id="checkLoginByMap" resultType="User">
-
+    <select id="checkLogin" resultType="User">
+        select * from t_user where username=#{arg0} and passwd=#{param2}
     </select>
+    <select id="checkLoginByMap" resultType="User">
+        select * from t_user where username=#{username} and passwd=#{passwd}
+    </select>
+    <insert id="insertUserByUser">
+        insert into t_user values (null,#{username},#{passwd},#{age},#{sex},#{email})
+    </insert>
+    <select id="checkLoginByParam" resultType="User">
+        select * from t_user where username=#{username} and passwd=#{passwd}
+    </select>
+
 
 </mapper>
