@@ -3,20 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <properties resource="jdbc.properties"></properties>
+    <typeAliases>
+<!--type为实体类 默认类名称，不区分大小写        -->
+        <package name="org.shuaihu.vip.mybatis.pojo"/>
+<!--        <typeAlias type="org.shuaihu.vip.mybatis.pojo.User" alias="UserMapper"></typeAlias>-->
+    </typeAliases>
 <!--    配置连接数据库的环境-->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatisdb?useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value="19991016zsh.."/>
+                <property name="driver" value="${jdbc.Driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.name}"/>
+                <property name="password" value="${jdbc.passwd}"/>
             </dataSource>
         </environment>
     </environments>
 <!--    引入映射文件-->
     <mappers>
-        <mapper resource="mappers/UserMapper.xml"/>
+        <package name="org.shuaihu.vip.mybatis.mapper"/>
+<!--        <mapper resource="mappers/UserMapper.xml"/>-->
     </mappers>
 </configuration>
