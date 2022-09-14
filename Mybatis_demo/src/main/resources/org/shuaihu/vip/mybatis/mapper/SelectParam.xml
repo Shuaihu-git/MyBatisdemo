@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.shuaihu.vip.mybatis.mapper.SelectParam">
+    <select id="SelectUserById" resultType="User">
+        select * from t_user where id =#{id}
+    </select>
+    <select id="selectUserByList" resultType="User">
+        select * from t_user
+    </select>
+    <select id="getUserCount" resultType="Integer">
+        select  COUNT(*) from t_USER
+    </select>
+    <select id="getUserMapById" resultType="Map">
+        SELECT * FROM T_USER WHERE ID =#{Id}
+    </select>
+    <select id="getAllUserToMap" resultType="Map">
+        SELECT * FROM T_USER
+    </select>
+    <select id="getUserToMap" resultType="Map">
+        SELECT * FROM T_USER
+    </select>
+
+</mapper>

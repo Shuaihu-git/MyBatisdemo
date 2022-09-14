@@ -76,4 +76,5 @@ public interface UserMapper {
      */
     User checkLoginByParam(@Param("username")String username,@Param("passwd")String passwd);
 
+
 }
