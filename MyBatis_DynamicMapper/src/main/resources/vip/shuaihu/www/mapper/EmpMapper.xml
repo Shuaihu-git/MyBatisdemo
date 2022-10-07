@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vip.shuaihu.www.mapper.EmpMapper">
+    <!--
+    动态SQL：
+    1、if标签的作用：
+    if通过test属性中的内容表达式判断内容中是否有效（是否拼接到sql中）
+    2、where标签的作用：
+    a、SQL里面增加where关键字
+    b、会自动将where标签中的多余的and去除，其中内容后多余的and不能去掉
+    c、若where标签中没有任何一个条件成立。则where没有任何功能
+    3、trim标签
+    prefix，suffix：在标签内容的前面或后面添加指定内容
+    prefixOverrides，suffixOverrides：在标签内容的前面或后面添加指定内容
+    4、choose,when,otherwise标签（if else……）
+    when 最少有一个，otherwise最多有一个
+    5、foreach标签
+
+    -->
+    <select id="getListByDynamic" resultType="Emp">
+        select * from T_EMP
+        <trim prefix="where" suffixOverrides="and" prefixOverrides="and">
+            <if test="empname != null and empname !=''">
+                and emp_name=#{empname}
+            </if>
+            <if test="age != null and age != ''">
+                and age= #{age}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex= #{sex}
+            </if>
+        </trim>
+
+    </select>
+    <select id="getListByChoose" resultType="Emp">
+        select * from T_EMP
+        <where>
+            <choose>
+                <when test="empname != null and empname !=''">
+                    emp_name=#{empname}
+                </when>
+                <when test="age != null and age != ''">
+                    age=#{age}
+                </when>
+                <when test="sex !=null and sex !=''">
+                    sex=#{sex}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+</mapper>
