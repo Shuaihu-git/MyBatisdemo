@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuaihu.vip.mapper.UpdateUsers">
+    <update id="updateUser">
+        update user set user_name=#{user_name},user_passwd=#{user_passwd},
+                        birthday=#{birthday},sex=#{sex},telephone=#{telephone},wechat=#{wechat}
+    </update>
+    <update id="updateUserByUserName">
+        update user set user_name=#{username},user_passwd='123456..',
+                        birthday="2022-02-03",sex="男",telephone="12345678945",wechat=null where user_name=#{username}
+    </update>
+
+</mapper>

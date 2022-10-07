@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuaihu.vip.mapper.DeptMapper">
+<resultMap id="DeptResultMap" type="Dept">
+    <id column="dept_id" property="deptid"></id>
+    <result column="dept_name" property="deptname"></result>
+</resultMap>
+    <select id="getDeptList" resultMap="DeptResultMap">
+        select * from T_DEPT
+    </select>
+    <select id="getEmpAndDeptByDeptId" resultMap="DeptResultMap">
+        select * from T_DEPT where dept_id=#{deptid}
+    </select>
+    <!--处理一对多的映射关系：
+    1、collection
+    2、分步查询-->
+    <resultMap id="DeptAndEmpResultMap" type="Dept">
+        <id column="dept_id" property="deptid"></id>
+        <result column="dept_name" property="deptname"></result>
+        <!--ofType:设置集合类型中存储的数据的类型-->
+        <collection property="emps" ofType="Emp">
+            <id column="emp_id" property="empid"></id>
+            <result column="emp_name" property="empname"></result>
+            <result column="age" property="age"></result>
+            <result column="sex" property="sex"></result>
+        </collection>
+    </resultMap>
+    <select id="getDeptAndEmpByDeptId" resultMap="DeptAndEmpResultMap">
+        select * from T_DEPT dept
+                                left join T_EMP emp on dept.dept_id=emp.dept_id
+                where dept.dept_id=#{deptid}
+    </select>
+    <resultMap id="DeptAndEmpResultMapByStepOne" type="Dept">
+        <id column="dept_id" property="deptid"></id>
+        <result column="dept_name" property="deptname"></result>
+        <collection property="emps"
+                     column="dept_id"
+                     select="com.shuaihu.vip.mapper.EmpMapper.getDeptAndEmpByStepTwo">
+        </collection>
+    </resultMap>
+
+    <select id="getDeptAndEmpByStepOne" resultMap="DeptAndEmpResultMapByStepOne">
+        select *
+        from T_DEPT where dept_id=#{deptid};
+    </select>
+
+</mapper>

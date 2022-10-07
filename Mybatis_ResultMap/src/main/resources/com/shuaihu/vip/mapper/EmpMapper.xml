@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuaihu.vip.mapper.EmpMapper">
+        <resultMap id="EmpResultMap" type="Emp">
+                <id column="emp_id" property="empid"></id>
+                <result column="emp_name" property="empname"></result>
+                <result column="age" property="age"></result>
+                <result column="sex" property="sex"></result>
+        </resultMap>
+        <select id="getEmpByEmpId" resultMap="EmpResultMap">
+        <!--     select emp_id empid,emp_name empname,age,sex from T_EMP where emp_id=#{empid}-->
+                select * from T_EMP  where emp_id=#{empid}
+        </select>
+                <select id="getEmpList" resultMap="EmpResultMap">
+                        select * from T_EMP
+                </select>
+        <!--        处理多对一的映射关系
+                    1、级联
+                    2、association
+                    3、分步查询
+        -->
+        <resultMap id="EmpAndDeptResultMapOne" type="Emp">
+                <id column="emp_id" property="empid"></id>
+                <result column="emp_name" property="empname"></result>
+                <result column="age" property="age"></result>
+                <result column="sex" property="sex"></result>
+                <result column="dept_id" property="dept.deptid"></result>
+                <result column="dept_name" property="dept.deptname"></result>
+        </resultMap>
+        <resultMap id="EmpAndDeptResultMap" type="Emp">
+                <id column="emp_id" property="empid"></id>
+                <result column="emp_name" property="empname"></result>
+                <result column="age" property="age"></result>
+                <result column="sex" property="sex"></result>
+                <association property="dept" javaType="Dept">
+                        <id column="dept_id" property="deptid"></id>
+                        <result column="dept_name" property="deptname"></result>
+                </association>
+        </resultMap>
+
+        <resultMap id="EmpAndDeptByStepResultMap" type="Emp">
+                <id column="emp_id" property="empid"></id>
+                <result column="emp_name" property="empname"></result>
+                <result column="age" property="age"></result>
+                <result column="sex" property="sex"></result>
+                <!-- 在开启延迟加载的环境中，通过该属性设置当前的分步查询是否使用延迟加载
+               fetchType="eager(立即加载)|lazy(延迟加载)"-->
+                <association property="dept" fetchType="lazy"
+                             select="com.shuaihu.vip.mapper.DeptMapper.getEmpAndDeptByDeptId"
+                             column="dept_id">
+                </association>
+        </resultMap>
+        <select id="getEmpAndDeptByEmpId" resultMap="EmpAndDeptResultMap">
+                select emp.*,dept.* from T_EMP emp
+                    left join T_DEPT dept on emp.dept_id=dept.dept_id
+                                    where emp.dept_id=#{empid}
+        </select>
+        <select id="getEmpAndDeptByStepOne" resultMap="EmpAndDeptByStepResultMap">
+            select * from T_EMP where emp_id=#{empid}
+        </select>
+        <select id="getEmpAndDeptByEmpIdToList" resultMap="EmpAndDeptResultMap">
+                select emp.*,dept.* from T_EMP emp
+                                                 left join T_DEPT dept on emp.dept_id=dept.dept_id
+        </select>
+
+        <select id="getDeptAndEmpByStepTwo" resultType="Emp">
+                select * from T_EMP where dept_id=#{deptid}
+        </select>
+</mapper>
