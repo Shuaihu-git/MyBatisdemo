@@ -13,14 +13,27 @@
     c、若where标签中没有任何一个条件成立。则where没有任何功能
     3、trim标签
     prefix，suffix：在标签内容的前面或后面添加指定内容
-    prefixOverrides，suffixOverrides：在标签内容的前面或后面添加指定内容
+    prefixOverrides，suffixOverrides：在标签内容的前面或后面删除指定内容
     4、choose,when,otherwise标签（if else……）
     when 最少有一个，otherwise最多有一个
     5、foreach标签
-
+    collection:设置要循环的数组或集合
+    item:用一个字符串表示数组或集合中的每一个数据
+    separator：设置每次循环数据之间的分割符
+    open：循环的所有内容以什么开始
+    close：训话的所有内容以什么结束
+    6、sql片段标签
+    可以记录一段sql语句，在需要的地方可以用include引用进来使用它
+    <sql id="EmpColumns" >
+        emp_id,emp_name,age,sex,dept_id
+    </sql>
+    <include refid="EmpColumns"></include>
     -->
+    <sql id="EmpColumns" >
+        emp_id,emp_name,age,sex,dept_id
+    </sql>
     <select id="getListByDynamic" resultType="Emp">
-        select * from T_EMP
+        select  <include refid="EmpColumns"></include> from T_EMP
         <trim prefix="where" suffixOverrides="and" prefixOverrides="and">
             <if test="empname != null and empname !=''">
                 and emp_name=#{empname}
@@ -50,5 +63,24 @@
             </choose>
         </where>
     </select>
-
+    <insert id="InsertUsersByBatch">
+        insert into T_EMP values
+            <foreach collection="emps" item="emp" separator=",">
+                (null,#{emp.empname},#{emp.age},#{emp.sex},null)
+            </foreach>
+    </insert>
+    <delete id="deleteUsersByBatch">
+        <!--DELETE FROM T_EMP where emp_id in
+        <foreach collection="empids" item="empid" separator="," open="(" close=")">
+                #{empid}
+        </foreach>-->
+        DELETE FROM T_EMP where
+                              <foreach collection="empids" item="empid" separator="or">
+                                  emp_id =#{empid}
+                              </foreach>
+    </delete>
+    <delete id="deleteUsersByLike">
+        delete from T_EMP where emp_name like '%${empnames}%'
+    </delete>
+    
 </mapper>
