@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎登录！</title>
+</head>
+<body style="align-items: center;">
+    <div class="content">
+        <div class="block_welcome">
+            <a class="welcome">欢迎登录！</a>
+        </div>
+
+        <form class="form1" >
+            <div style="width: 330px; height: 336px; visibility: visible;">
+                <div style="height: 347px;">
+                    <div class="block-list" >
+                        <div>
+                            <a style="color: cornflowerblue " >名称:</a>
+                            <input class="name" id="LoginName" placeholder="请输入用户名称" type="text">
+                        </div>
+
+                        <div>
+                            <a style="color: cornflowerblue">密码:</a>
+                            <input class="passwd" id="LoginPasswd" placeholder="请输入密码" type="password" value="">
+
+                        </div>
+                        <div>
+                            <button class="LoginButton" onclick="onclickCheck() " type="submit">登录</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+<script>
+    let username;
+    let passwd;
+    let LoginButton;
+    window.onload=function setData() {
+       username=document.getElementsByTagName("input").item(0);
+       passwd=document.getElementsByTagName("input").item(1);
+    }
+
+   function onclickCheck(){
+       CheckUser();
+       console.log(username.value);
+       console.log(passwd.value);
+    }
+    function CheckUser() {
+        if (username.value=="123456789"&&passwd.value=="12345678"){
+            alert("登录成功！")
+        }else {
+            alert("登录失败！")
+        }
+    }
+</script>
+<style>
+
+    .content{
+        height: 200px;
+        width: 340px;
+        margin-top: 0;
+        align-items: center;
+        background: url("src/loginbackground.png");
+        position: relative;
+    }
+    .block-list,.block_welcome,.welcome{
+        font-family: "楷体";
+        margin-top: 20px;
+        text-align: center;
+        color: darkmagenta;
+        size: A5;
+
+    }
+    .name,.passwd{
+        font-family: "楷体";
+        width: 40%;
+        height: 10%;
+        margin: 10px 10px;/*标签外边距 上下 左右*/
+        border: 1px solid slateblue;/* 边框 宽度 直线类型 边框颜色*/
+        border-radius: 1px;
+        overflow-style:marquee-block;
+
+    }
+    .LoginButton{
+        font-family: "楷体";
+        width: 30%;
+        height: 10%;
+        margin: 20px 55px;
+        align-items: center;
+        border:1px solid aqua;
+        border-radius: 1px;
+
+    }
+</style>
+</html>
