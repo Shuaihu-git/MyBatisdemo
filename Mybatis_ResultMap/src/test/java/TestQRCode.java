@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 生成二维码
+ * 生成二维码（Generate QRCode）
  * @Author 张帅虎
  * @Data 2022/10/4
  */
@@ -28,13 +28,15 @@ public class TestQRCode {
         map.put(EncodeHintType.CHARACTER_SET,"UTF-8");
         map.put(EncodeHintType.MARGIN,2);
         map.put(EncodeHintType.ERROR_CORRECTION,ErrorCorrectionLevel.L);
+        //定义二维码大小
         int height=600;
         int width=600;
-
+        //获取画板对象
         MultiFormatWriter multiFormatWriter=new MultiFormatWriter();
         BitMatrix encode = multiFormatWriter.encode(content, type, width, height, map);
         int black= Color.black.getRGB();
         int white=Color.white.getRGB();
+        //绘制二维码
         BufferedImage image=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -42,7 +44,7 @@ public class TestQRCode {
             }
 
         }
-
+        //将生成的二维码数据导出到指定文件
         File file =new File("D://JPG//test.jpg");
         if (!file.exists()){
             file.mkdirs();

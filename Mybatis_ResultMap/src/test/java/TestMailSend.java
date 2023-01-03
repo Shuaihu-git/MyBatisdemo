@@ -30,7 +30,7 @@ public class TestMailSend {
         String content="Test Mail From http://www.shuaihu.vip" +
                 "Mail send by zsh1583139786@qq.com";
         MimeMessage message=new MimeMessage(session);
-        message.setFrom(new InternetAddress("zsh1583139786@qq.com"));
+        message.setFrom(new InternetAddress("1583139786@qq.com"));
         InternetAddress [] internetAddress;
         internetAddress = new InternetAddress[3];
         internetAddress[0]=new InternetAddress("shuaihu13637271700@dingtalk.com");
