@@ -38,6 +38,10 @@ public class MyBatisTest {
         System.out.println("result="+result);
 
     }
+
+    /**
+     * 测试更新用户信息
+     */
     @Test
     public void updateUser() {
         try {
@@ -61,6 +65,10 @@ public class MyBatisTest {
         }
 
     }
+
+    /**
+     * 测试删除用户信息
+     */
     @Test
     public void deleteUser(){
         try {
@@ -76,6 +84,10 @@ public class MyBatisTest {
             System.out.println("删除失败");
         }
     }
+
+    /**
+     * 测试通过ID来获得用户信息
+     */
     @Test
     public void getUserById(){
         try {
@@ -93,16 +105,25 @@ public class MyBatisTest {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 测试通过用户名称来获取用户信息
+     * @throws IOException
+     */
     @Test
-    public void TestUserInfoByUsername() throws IOException {
+    public void testUserInfoByUsername() throws IOException {
         SqlSession sqLsession = SQLSessionUtils.getSQLsession();
         UserMapper mapper = sqLsession.getMapper(UserMapper.class);
         User user = mapper.getUserInfoByUserName("王五");
         System.out.println(user);
 
     }
+
+    /**
+     * 测试检查用户登录
+     */
     @Test
-    public void  TestcheckLogin(){
+    public void  testCheckLogin(){
         SqlSession sqLsession = SQLSessionUtils.getSQLsession();
         UserMapper mapper = sqLsession.getMapper(UserMapper.class);
         User user = mapper.checkLogin("王五", "root");
@@ -110,8 +131,11 @@ public class MyBatisTest {
 
     }
 
+    /**
+     * 测试通过Map集合，来检查登录状态
+     */
     @Test
-    public void  TestcheckLoginByMap(){
+    public void  testCheckLoginByMap(){
         SqlSession sqLsession = SQLSessionUtils.getSQLsession();
         UserMapper mapper = sqLsession.getMapper(UserMapper.class);
         Map<String,Object> map=new HashMap<>();
@@ -121,15 +145,23 @@ public class MyBatisTest {
         System.out.println(user);
 
     }
+
+    /**
+     * 测试插入用户信息
+     */
     @Test
-    public void  TestInsertUser(){
+    public void  testInsertUser(){
         SqlSession sqLsession = SQLSessionUtils.getSQLsession();
         UserMapper mapper = sqLsession.getMapper(UserMapper.class);
         int result = mapper.insertUserByUser(new User(null, "admin", "root..", 23, "男", "1231313553@qq.com"));
         System.out.println(result);
     }
+
+    /**
+     * 测试通过@Param注解来登录
+     */
     @Test
-        public void  TestcheckLoginByParam(){
+        public void  testCheckLoginByParam(){
             SqlSession sqLsession = SQLSessionUtils.getSQLsession();
             UserMapper mapper = sqLsession.getMapper(UserMapper.class);
             User user = mapper.checkLoginByParam("admin", "root..");

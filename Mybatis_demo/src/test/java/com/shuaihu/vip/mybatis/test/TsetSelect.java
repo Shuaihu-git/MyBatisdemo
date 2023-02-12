@@ -11,10 +11,18 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+/**
+ * 测试查询功能
+ * @Author 张帅虎
+ * @Data 2023/2/12
+ */
 
 public class TsetSelect {
+    /**
+     * 测试使用@Param注解来通过id获取用户信息
+     */
     @Test
-    public void Test(){
+    public void test(){
         SqlSession sqLsession = SQLSessionUtils.getSQLsession();
         SelectParam mapper = sqLsession.getMapper(SelectParam.class);
         System.out.println(mapper.SelectUserById(5));
