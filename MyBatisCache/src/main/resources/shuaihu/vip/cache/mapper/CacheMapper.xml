@@ -6,5 +6,7 @@
     <select id="getEmpById" resultType="Emp">
         select * from T_EMP where emp_id=#{eid}
     </select>
-
+    <insert id="insertEmp" useGeneratedKeys="true">
+        insert into T_EMP values (#{empid},#{empname},#{age},#{sex},1)
+    </insert>
 </mapper>
