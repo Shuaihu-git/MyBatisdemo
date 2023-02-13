@@ -7,8 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MyBatis_DynamicMapper" />
-        <module name="Mybatis_demo" />
+        <module name="MyBatisCache" />
         <module name="Mybatis_ResultMap" />
+        <module name="Mybatis_demo" />
       </profile>
     </annotationProcessing>
   </component>
