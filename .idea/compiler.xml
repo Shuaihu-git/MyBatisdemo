@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="MyBatis_DynamicMapper" />
         <module name="MyBatisCache" />
+        <module name="MyBatis_MBG" />
         <module name="Mybatis_ResultMap" />
         <module name="Mybatis_demo" />
       </profile>
