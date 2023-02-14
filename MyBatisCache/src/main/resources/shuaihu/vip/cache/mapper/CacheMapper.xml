@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shuaihu.vip.cache.mapper.CacheMapper">
     <!--设置二级缓存-->
-    <cache/>
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
     <select id="getEmpById" resultType="Emp">
         select * from T_EMP where emp_id=#{eid}
     </select>
