@@ -13,6 +13,10 @@
         <package name="shuaihu.vip.pojo"/>
         <!--        <typeAlias type="org.shuaihu.vip.mybatis.pojo.User" alias="UserMapper"></typeAlias>-->
     </typeAliases>
+    <plugins>
+        <!--设置分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
     <!--    配置连接数据库的环境-->
     <environments default="development">
         <environment id="development">
