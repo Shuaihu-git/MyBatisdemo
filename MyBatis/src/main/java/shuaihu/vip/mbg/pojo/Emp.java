@@ -160,4 +160,26 @@ public class Emp {
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
     }
+
+    public Emp() {
+    }
+
+    public Emp(Integer empId, String empName, Integer age, String sex, Integer deptId) {
+        this.empId = empId;
+        this.empName = empName;
+        this.age = age;
+        this.sex = sex;
+        this.deptId = deptId;
+    }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "empId=" + empId +
+                ", empName='" + empName + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                ", deptId=" + deptId +
+                '}';
+    }
 }

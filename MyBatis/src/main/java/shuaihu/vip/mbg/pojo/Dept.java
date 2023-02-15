@@ -65,6 +65,14 @@ public class Dept {
         this.deptName = deptName == null ? null : deptName.trim();
     }
 
+    public Dept() {
+    }
+
+    public Dept(Integer deptId, String deptName) {
+        this.deptId = deptId;
+        this.deptName = deptName;
+    }
+
     @Override
     public String toString() {
         return "Dept{" +

@@ -64,4 +64,21 @@ public class User {
     public void setPasswd(String passwd) {
         this.passwd = passwd == null ? null : passwd.trim();
     }
+
+    public User(){
+
+    }
+
+    public User(String user, String passwd) {
+        this.user = user;
+        this.passwd = passwd;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user='" + user + '\'' +
+                ", passwd='" + passwd + '\'' +
+                '}';
+    }
 }

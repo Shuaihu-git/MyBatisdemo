@@ -64,4 +64,20 @@ public class UserKey {
     public void setUser(String user) {
         this.user = user == null ? null : user.trim();
     }
+
+    public UserKey(String host, String user) {
+        this.host = host;
+        this.user = user;
+    }
+
+    public UserKey() {
+    }
+
+    @Override
+    public String toString() {
+        return "UserKey{" +
+                "host='" + host + '\'' +
+                ", user='" + user + '\'' +
+                '}';
+    }
 }
