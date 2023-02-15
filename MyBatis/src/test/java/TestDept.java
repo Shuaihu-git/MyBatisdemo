@@ -47,11 +47,16 @@ public class TestDept {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        EmpExample empExample = new EmpExample();
+        /*EmpExample empExample = new EmpExample();
         empExample.createCriteria().andAgeGreaterThanOrEqualTo(20).andDeptIdBetween(1,5);
         EmpMapper mapper = sqlSession.getMapper(EmpMapper.class);
         List<Emp> emps = mapper.selectByExample(empExample);
-        System.out.println(emps);
+        */
+        EmpMapper mapper = sqlSession.getMapper(EmpMapper.class);
+        //mapper.insert(new Emp(null,"mazi",22,"男",3));
+        //mapper.updateByPrimaryKey(new Emp(213,"mazi",18,"女",3));
+        mapper.updateByPrimaryKeySelective(new Emp(213,"mazi",null,"男",3));
+        System.out.println();
     }
     /**
      * 测试招聘职位信息
