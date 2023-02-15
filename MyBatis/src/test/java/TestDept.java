@@ -1,3 +1,4 @@
+import com.google.zxing.common.detector.MathUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -69,13 +70,20 @@ public class TestDept {
         postExample.createCriteria();
         PostMapper mapper = sqlSession.getMapper(PostMapper.class);
         List<Post> posts = mapper.selectByExample(postExample);
-        System.out.println(posts);
+        //System.out.println(posts);
+
         String filePath="D:/File"+File.separator+"职位信息.txt";
         try {
-            FileOutputStream fileInputStream = new FileOutputStream(new File(filePath));
+            /*FileOutputStream fileInputStream = new FileOutputStream(new File(filePath));
             String postsContent = posts.toString();
-            fileInputStream.write(postsContent.getBytes(StandardCharsets.UTF_8));
-
+            fileInputStream.write(postsContent.getBytes(StandardCharsets.UTF_8));*/
+            FileInputStream fileInputStream1 = new FileInputStream(new File(filePath));
+            System.out.println(new File(filePath).getTotalSpace());
+            int length= (int) Math.round((int)Math.pow(10,1)*new File(filePath).length()*(double) 1024*1024/Math.pow(10,1));
+            System.out.println(length);
+            byte[] bytes=new byte[length];
+            int read = fileInputStream1.read(bytes);
+            System.out.println(new String(bytes,0,read));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
